@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Previsão do Tempo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo">🌤️ Previsão do Tempo</h1>
+        <div class="search-bar">
+          <input
+            type="text"
+            id="cityInput"
+            placeholder="Buscar cidade..."
+            autocomplete="off"
+          />
+          <button id="searchBtn" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+          <button id="locationBtn" title="Usar minha localização" aria-label="Usar localização atual">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+              <circle cx="12" cy="12" r="9" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <p>Detectando sua localização...</p>
+      </div>
+
+      <div id="errorState" class="error-state hidden">
+        <div class="error-icon">⚠️</div>
+        <h2 id="errorTitle">Erro ao carregar previsão</h2>
+        <p id="errorMsg"></p>
+        <button id="retryBtn" class="btn-retry">Tentar novamente</button>
+      </div>
+
+      <div id="weatherContent" class="weather-content hidden">
+        <!-- Alertas -->
+        <div id="alertsSection" class="alerts-section hidden">
+          <div id="alertsList"></div>
+        </div>
+
+        <!-- Cabeçalho da cidade -->
+        <section class="current-section">
+          <div class="location-info">
+            <h2 id="cityName">--</h2>
+            <p id="countryName">--</p>
+            <p id="lastUpdated" class="last-updated"></p>
+          </div>
+          <div class="current-weather">
+            <div class="current-main">
+              <span id="weatherIcon" class="weather-icon-large">--</span>
+              <div>
+                <div id="currentTemp" class="current-temp">--°C</div>
+                <div id="feelsLike" class="feels-like">Sensação --°C</div>
+              </div>
+            </div>
+            <p id="weatherDesc" class="weather-desc">--</p>
+          </div>
+          <div class="current-details">
+            <div class="detail-card">
+              <span class="detail-icon">💧</span>
+              <span class="detail-label">Umidade</span>
+              <span id="humidity" class="detail-value">--%</span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-icon">💨</span>
+              <span class="detail-label">Vento</span>
+              <span id="windSpeed" class="detail-value">-- km/h</span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-icon">🧭</span>
+              <span class="detail-label">Direção</span>
+              <span id="windDir" class="detail-value">--</span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-icon">🌂</span>
+              <span class="detail-label">Chuva (1h)</span>
+              <span id="rainNow" class="detail-value">-- mm</span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-icon">👁️</span>
+              <span class="detail-label">Visibilidade</span>
+              <span id="visibility" class="detail-value">-- km</span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-icon">📊</span>
+              <span class="detail-label">Pressão</span>
+              <span id="pressure" class="detail-value">-- hPa</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Previsão horária (24h) -->
+        <section class="section-card">
+          <h3 class="section-title">Próximas 24 horas</h3>
+          <div id="hourlyForecast" class="hourly-scroll"></div>
+        </section>
+
+        <!-- Precipitação -->
+        <section class="section-card">
+          <h3 class="section-title">🌧️ Previsão de Chuva (7 dias)</h3>
+          <div id="rainChart" class="rain-chart"></div>
+        </section>
+
+        <!-- Previsão dos próximos dias -->
+        <section class="section-card">
+          <h3 class="section-title">📅 Previsão para os próximos dias</h3>
+          <div id="dailyForecast" class="daily-forecast"></div>
+        </section>
+
+        <!-- Vento -->
+        <section class="section-card wind-section">
+          <h3 class="section-title">💨 Condições de Vento (7 dias)</h3>
+          <div id="windForecast" class="wind-forecast"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Dados fornecidos por <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> &amp; <a href="https://ip-api.com/" target="_blank" rel="noopener">ip-api</a></p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

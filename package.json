@@ -1,0 +1,20 @@
+{
+  "name": "previsao-do-tempo",
+  "version": "1.0.0",
+  "description": "Site de previsão do tempo com geolocalização por IP",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "node-fetch": "^2.7.0"
+  },
+  "keywords": ["weather", "previsao", "tempo"],
+  "license": "MIT"
+}
